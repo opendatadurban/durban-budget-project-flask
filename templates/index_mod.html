@@ -16,6 +16,8 @@
 
     <!-- Custom CSS -->
     <link href="/static/css/freelancer.css" rel="stylesheet">
+    <link href="/static/css/bubbletree.css" rel="stylesheet">
+    <link href="/static/css/site.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -29,11 +31,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body id="page-top" class="index">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -271,11 +271,15 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Visualization 1</h2>
+                            <h2>Hierarchical Breakdown</h2>
                             <hr class="star-primary">
-                            <img src="/static/img/portfolio/Nodes2-256.png" class="img-responsive img-centered" alt="">
-                            <p>Project description goes here.</p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <div class="bubbletree-wrapper">
+                                <div class="bubbletree"></div>
+                            </div>
+                            <button type="button"
+                                    class="btn btn-default"
+                                    data-dismiss="modal">
+                                    <i class="fa fa-times"></i> Close</button>
                         </div>
                     </div>
                 </div>
@@ -331,6 +335,9 @@
 
     <!-- jQuery -->
     <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/jquery-migrate.min.js"></script>
+    <script src="/static/js/jquery.history.js"></script>
+    <script src="/static/js/jquery.tooltip.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>
@@ -339,6 +346,10 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="/static/js/classie.js"></script>
     <script src="/static/js/cbpAnimatedHeader.js"></script>
+    
+    <script src="/static/js/tween.js"></script>
+    <script src="/static/js/raphael-min.js"></script>
+    <script src="/static/js/bubbletree.js"></script>
 
     <!-- Contact Form JavaScript -->
     <script src="/static/js/jqBootstrapValidation.js"></script>
@@ -346,7 +357,39 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/static/js/freelancer.js"></script>
-
+    
+    <script>
+        $('#portfolioModal1').on('show.bs.modal', function(e) {
+            $(function() {
+                var url = "https://data.municipalmoney.org.za/api/cubes/bsheet/facts?cut=demarcation.label:eThekwini+Metropolitan+Municipality|financial_year_end.year:2015|period_length.length:year|amount_type.label:Audited+Actual|item.return_form_structure:subtotal";
+                $.getJSON(url, function(response) {
+                    var data = {
+                      label: 'Total',
+                      amount: 0,
+                      color: '#282828',
+                      children: []
+                    };
+                    for (var i = 0; i < response.data.length; i++) {
+                        var obj = response.data[i];
+                        var amount = obj['amount'];
+                        if (amount == null) {
+                            amount = 0;
+                        }
+                        data.amount += amount;
+                        data.children.push({
+                            label: obj['item.label'],
+                            amount: amount,
+                            color: '#f03e45'
+                        });
+                    }
+                    new BubbleTree({
+                        data: data,
+                        container: '.bubbletree'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

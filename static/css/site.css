@@ -1,0 +1,19 @@
+#portfolioModal1 .modal-body {
+    height: 780px;
+}
+#portfolioModal1 .btn {
+    position: absolute;
+    bottom: 0px;
+    width: 90px;
+    left: calc(50% - 45px);
+}
+.bubbletree-wrapper {
+    width: 600px;
+    bottom: 50px;
+    height: 600px;
+    left: calc(50% - 300px);
+}
+.bubbletree .bubbletree-amount,
+.bubbletree .bubbletree-desc {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
