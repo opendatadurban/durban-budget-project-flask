@@ -361,29 +361,10 @@
     <script>
         $('#portfolioModal1').on('show.bs.modal', function(e) {
             $(function() {
-                var url = "https://data.municipalmoney.org.za/api/cubes/bsheet/facts?cut=demarcation.label%3AeThekwini|financial_year_end.year%3A2015|period_length.length%3Ayear|amount_type.label%3AAudited+Actual|item.return_form_structure%3Asubtotal&page=0&pagesize=30&fields=amount%2Cdemarcation.label%2Camount_type.label%2Cfinancial_year_end.year%2Cperiod_length.length%2Citem.label%2Cfinancial_period.period%2Citem.return_form_structure%2Citem.position_in_return_form";
+                var url = "/api/budget/bubbletree";
                 $.getJSON(url, function(response) {
-                    var data = {
-                      label: 'Total',
-                      amount: 0,
-                      color: '#282828',
-                      children: []
-                    };
-                    for (var i = 0; i < response.data.length; i++) {
-                        var obj = response.data[i];
-                        var amount = obj['amount'];
-                        if (amount == null) {
-                            amount = 0;
-                        }
-                        data.amount += amount;
-                        data.children.push({
-                            label: obj['item.label'],
-                            amount: amount,
-                            color: '#f03e45'
-                        });
-                    }
                     new BubbleTree({
-                        data: data,
+                        data: response,
                         container: '.bubbletree'
                     });
                 });
