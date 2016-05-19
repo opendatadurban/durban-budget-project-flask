@@ -361,7 +361,7 @@
     <script>
         $('#portfolioModal1').on('show.bs.modal', function(e) {
             $(function() {
-                var url = "https://data.municipalmoney.org.za/api/cubes/bsheet/facts?cut=demarcation.label:eThekwini+Metropolitan+Municipality|financial_year_end.year:2015|period_length.length:year|amount_type.label:Audited+Actual|item.return_form_structure:subtotal";
+                var url = "https://data.municipalmoney.org.za/api/cubes/bsheet/facts?cut=demarcation.label%3AeThekwini|financial_year_end.year%3A2015|period_length.length%3Ayear|amount_type.label%3AAudited+Actual|item.return_form_structure%3Asubtotal&page=0&pagesize=30&fields=amount%2Cdemarcation.label%2Camount_type.label%2Cfinancial_year_end.year%2Cperiod_length.length%2Citem.label%2Cfinancial_period.period%2Citem.return_form_structure%2Citem.position_in_return_form";
                 $.getJSON(url, function(response) {
                     var data = {
                       label: 'Total',
