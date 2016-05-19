@@ -1,13 +1,12 @@
 import os
 import sys
-
+from flask import render_template, Flask, jsonify
+import requests
 if sys.version_info >= (3, 0):
     from functools import reduce
 
-from flask import render_template, Flask, jsonify
-import requests
-
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -62,4 +61,4 @@ def bubbletree():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port)
