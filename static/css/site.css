@@ -7,13 +7,27 @@
     width: 90px;
     left: calc(50% - 45px);
 }
+.bubbletree .bubbletree-amount,
+.bubbletree .bubbletree-desc {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .bubbletree-wrapper {
     width: 600px;
     bottom: 50px;
     height: 600px;
     left: calc(50% - 300px);
 }
-.bubbletree .bubbletree-amount,
-.bubbletree .bubbletree-desc {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+@media(max-width:768px) {
+    #portfolioModal1 .modal-body {
+        height: 640px;
+    }
+
+    .bubbletree-wrapper {
+        width: 360px;
+        bottom: 80px;
+        height: 400px;
+        left: calc(50% - 180px);
+    }
 }
